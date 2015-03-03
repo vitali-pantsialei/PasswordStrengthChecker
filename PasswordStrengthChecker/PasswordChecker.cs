@@ -5,8 +5,12 @@ using System.Text;
 
 namespace PasswordStrengthChecker
 {
-    public class PasswordChecker
+    public class PasswordChecker : IChecker
     {
+        private char[] SPECIAL_SYMBOLS = {'{', '}', '#', ',', '!', '_', '@', '^', '(', 
+                                               ')', ':', '.', '|', '$', '[', ']', ';', '?',
+                                               '=', '+', '-', '*', '~', '%' };
+
         public bool Verify(string login, string pwd, bool isAdmin, out string msg)
         {
             msg = "OK";
@@ -42,7 +46,11 @@ namespace PasswordStrengthChecker
                     msg = "Password should be more  than 10 chars for admins";
                     return false;
                 }
-                //????????????????else if (!pwd.Any(ch => Char))
+                else if (!pwd.Any(ch => SPECIAL_SYMBOLS.Contains(ch)))
+                {
+                    msg = "Password should contain at least one special character";
+                    return false;
+                }
             }
             return true;
         }

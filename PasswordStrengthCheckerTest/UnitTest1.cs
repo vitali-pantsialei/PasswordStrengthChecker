@@ -90,7 +90,7 @@ namespace PasswordStrengthCheckerTest
             PasswordChecker pc = new PasswordChecker();
             string msg;
 
-            bool res = pc.Verify("user", "12345678g6876786", true, out msg);
+            bool res = pc.Verify("user", "12345678g6876786efe", true, out msg);
 
             Assert.IsFalse(res);
         }
